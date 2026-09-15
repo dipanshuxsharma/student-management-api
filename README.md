@@ -1,8 +1,8 @@
 # Student Management API
 
-A RESTful Student Management API built using Java, Spring Boot, Spring Data JPA, MySQL, Spring Security, Validation, and Swagger/OpenAPI.
+A **RESTful Student Management API** built with Java and Spring Boot. This project demonstrates core backend development concepts including REST API development, CRUD operations, database integration, pagination, sorting, validation, exception handling, and API documentation.
 
-## Features
+## 🚀 Features
 
 * Create a student
 * Get all students
@@ -13,47 +13,92 @@ A RESTful Student Management API built using Java, Spring Boot, Spring Data JPA,
 * Pagination
 * Sorting
 * Request validation
-* Custom exception handling
-* Swagger/OpenAPI documentation
+* Global exception handling
 * MySQL database integration
+* Spring Security integration
+* Swagger/OpenAPI documentation
 
-## Tech Stack
+## 🛠️ Tech Stack
 
-* Java
-* Spring Boot
-* Spring MVC / REST API
-* Spring Data JPA
-* Hibernate
-* MySQL
-* Spring Security
-* Jakarta Validation
-* Swagger / OpenAPI
-* Maven
+* **Java**
+* **Spring Boot**
+* **Spring MVC / REST API**
+* **Spring Data JPA**
+* **Hibernate**
+* **MySQL**
+* **Spring Security**
+* **Jakarta Validation**
+* **Swagger / OpenAPI**
+* **Maven**
 
-## API Endpoints
+## 🏗️ Project Architecture
 
-| Method | Endpoint                        | Description                            |
-| ------ | ------------------------------- | -------------------------------------- |
-| POST   | `/api/students`                 | Create student                         |
-| GET    | `/api/students`                 | Get students with pagination & sorting |
-| GET    | `/api/students/{id}`            | Get student by ID                      |
-| GET    | `/api/students/search?name=Rah` | Search students by name                |
-| PUT    | `/api/students/{id}`            | Update student                         |
-| DELETE | `/api/students/{id}`            | Delete student                         |
+The application follows a layered backend architecture:
 
-## Pagination & Sorting
+```text
+Client
+   ↓
+Controller
+   ↓
+Service
+   ↓
+Repository
+   ↓
+MySQL Database
+```
 
-Example:
+### Layers
 
-`GET /api/students?page=0&size=5&sortBy=name`
+* **Controller** – Handles HTTP requests and API endpoints.
+* **Service** – Contains business logic.
+* **Repository** – Performs database operations using Spring Data JPA.
+* **Entity** – Represents the database table.
+* **Exception Handler** – Handles application exceptions and returns meaningful HTTP responses.
 
-* `page` → Page number
-* `size` → Number of students per page
-* `sortBy` → Field used for sorting
+## 📌 API Endpoints
 
-## Validation
+| Method   | Endpoint                        | Description                              |
+| -------- | ------------------------------- | ---------------------------------------- |
+| `POST`   | `/api/students`                 | Create a new student                     |
+| `GET`    | `/api/students`                 | Get students with pagination and sorting |
+| `GET`    | `/api/students/{id}`            | Get student by ID                        |
+| `GET`    | `/api/students/search?name=Rah` | Search students by name                  |
+| `PUT`    | `/api/students/{id}`            | Update student                           |
+| `DELETE` | `/api/students/{id}`            | Delete student                           |
 
-The API validates:
+## 📄 Pagination & Sorting
+
+The API supports pagination and sorting using query parameters.
+
+### Example
+
+```http
+GET /api/students?page=0&size=5&sortBy=name
+```
+
+### Parameters
+
+| Parameter | Description                 |
+| --------- | --------------------------- |
+| `page`    | Page number                 |
+| `size`    | Number of students per page |
+| `sortBy`  | Field used for sorting      |
+
+## 🔍 Search
+
+Students can be searched by name.
+
+### Example
+
+```http
+GET /api/students/search?name=Rah
+```
+
+This returns students whose names match the provided search value.
+
+## ✅ Validation
+
+The API validates incoming student data including:
 
 * Name
 * Email
@@ -61,40 +106,121 @@ The API validates:
 * Department
 * Age
 
-Invalid requests return HTTP `400 Bad Request`.
+Invalid requests return:
 
-## Exception Handling
+```text
+HTTP 400 Bad Request
+```
 
-Custom exception handling is implemented for cases where a student does not exist.
+## ⚠️ Exception Handling
+
+Global exception handling is implemented to provide appropriate HTTP responses for errors.
+
+For example, when a student does not exist:
+
+```http
+GET /api/students/999
+```
+
+The API returns:
+
+```text
+HTTP 404 Not Found
+```
+
+## 🔐 Security
+
+Spring Security is integrated into the application for API security.
+
+> If JWT authentication is implemented later, authentication and authorization details can be added here.
+
+## 📚 Swagger / OpenAPI
+
+Swagger/OpenAPI is used to document and test the REST APIs directly from the browser.
+
+After starting the application, open:
+
+```text
+http://localhost:8080/swagger-ui/index.html
+```
+
+Swagger UI allows you to explore and test the available API endpoints.
+
+## 🗄️ Database
+
+The application uses **MySQL** as the relational database.
+
+Database:
+
+```text
+student_management
+```
+
+Configure your database credentials in:
+
+```text
+src/main/resources/application.properties
+```
 
 Example:
 
-`GET /api/students/999`
+```properties
+spring.datasource.url=jdbc:mysql://localhost:3306/student_management
+spring.datasource.username=YOUR_USERNAME
+spring.datasource.password=YOUR_PASSWORD
+```
 
-Returns HTTP `404 Not Found`.
+**Do not upload real database passwords or sensitive credentials to GitHub.**
 
-## Swagger Documentation
+## ▶️ How to Run
 
-Swagger UI is available at:
+### 1. Clone the repository
 
-`/swagger-ui/index.html`
+```bash
+git clone YOUR_GITHUB_REPOSITORY_URL
+```
 
-It can be used to test all API endpoints directly from the browser.
+### 2. Create the database
 
-## Database
+Open MySQL and run:
 
-The application uses MySQL with the database:
+```sql
+CREATE DATABASE student_management;
+```
 
-`student_management`
+### 3. Configure database
 
-## How to Run
+Update your MySQL username and password in:
 
-1. Clone the repository.
-2. Create the `student_management` database in MySQL.
-3. Configure MySQL username and password in `application.properties`.
-4. Run the Spring Boot application.
-5. Open Swagger UI to test the APIs.
+```text
+application.properties
+```
 
-## Author
+### 4. Build the project
 
-Dipanshu Sharma
+```bash
+mvn clean install
+```
+
+### 5. Run the application
+
+```bash
+mvn spring-boot:run
+```
+
+You can also run the application directly from your IDE.
+
+### 6. Open Swagger
+
+Once the application starts, visit:
+
+```text
+http://localhost:8080/swagger-ui/index.html
+```
+
+## 📦 Example Request
+
+### C
+
+
+

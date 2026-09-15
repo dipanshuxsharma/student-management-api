@@ -1,6 +1,6 @@
 # Student Management API
 
-A **RESTful Student Management API** built with Java and Spring Boot. This project demonstrates core backend development concepts including REST API development, CRUD operations, database integration, pagination, sorting, validation, exception handling, and API documentation.
+A **RESTful Student Management API** built with **Java and Spring Boot**. This project demonstrates core backend development concepts including REST API development, CRUD operations, database integration, pagination, sorting, validation, exception handling, Spring Security, and API documentation.
 
 ## 🚀 Features
 
@@ -72,7 +72,7 @@ The API supports pagination and sorting using query parameters.
 
 ### Example
 
-```http
+```text
 GET /api/students?page=0&size=5&sortBy=name
 ```
 
@@ -90,7 +90,7 @@ Students can be searched by name.
 
 ### Example
 
-```http
+```text
 GET /api/students/search?name=Rah
 ```
 
@@ -114,11 +114,11 @@ HTTP 400 Bad Request
 
 ## ⚠️ Exception Handling
 
-Global exception handling is implemented to provide appropriate HTTP responses for errors.
+Global exception handling is implemented to provide appropriate HTTP responses for application errors.
 
 For example, when a student does not exist:
 
-```http
+```text
 GET /api/students/999
 ```
 
@@ -130,9 +130,9 @@ HTTP 404 Not Found
 
 ## 🔐 Security
 
-Spring Security is integrated into the application for API security.
+**Spring Security** is integrated into the application for API security.
 
-> If JWT authentication is implemented later, authentication and authorization details can be added here.
+> JWT-based authentication is not currently implemented in this version.
 
 ## 📚 Swagger / OpenAPI
 
@@ -150,7 +150,7 @@ Swagger UI allows you to explore and test the available API endpoints.
 
 The application uses **MySQL** as the relational database.
 
-Database:
+### Database Name
 
 ```text
 student_management
@@ -170,14 +170,15 @@ spring.datasource.username=YOUR_USERNAME
 spring.datasource.password=YOUR_PASSWORD
 ```
 
-**Do not upload real database passwords or sensitive credentials to GitHub.**
+> **Important:** Never upload real database passwords or sensitive credentials to GitHub.
 
 ## ▶️ How to Run
 
 ### 1. Clone the repository
 
 ```bash
-git clone YOUR_GITHUB_REPOSITORY_URL
+git clone https://github.com/dipanshuxsharma/student-management-api.git
+cd student-management-api
 ```
 
 ### 2. Create the database
@@ -188,12 +189,12 @@ Open MySQL and run:
 CREATE DATABASE student_management;
 ```
 
-### 3. Configure database
+### 3. Configure the database
 
 Update your MySQL username and password in:
 
 ```text
-application.properties
+src/main/resources/application.properties
 ```
 
 ### 4. Build the project
@@ -220,7 +221,40 @@ http://localhost:8080/swagger-ui/index.html
 
 ## 📦 Example Request
 
-### C
+### Create Student
 
+```http
+POST /api/students
+Content-Type: application/json
+```
 
+```json
+{
+  "name": "Rahul Sharma",
+  "email": "rahul@example.com",
+  "phone": "9876543210",
+  "department": "Computer Science",
+  "age": 21
+}
+```
+
+## 🎯 Learning Outcomes
+
+Through this project, I practiced:
+
+* Building RESTful APIs with Spring Boot
+* Implementing CRUD operations
+* Working with Spring Data JPA and Hibernate
+* Integrating MySQL with a Spring Boot application
+* Implementing validation and exception handling
+* Adding pagination and sorting
+* Integrating Spring Security
+* Documenting APIs using Swagger/OpenAPI
+* Following a layered backend architecture
+
+## 👨‍💻 Author
+
+**Dipanshu Sharma**
+
+GitHub: [@dipanshuxsharma](https://github.com/dipanshuxsharma)
 
